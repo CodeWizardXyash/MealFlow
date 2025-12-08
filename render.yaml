@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: mealflow-backend
+    env: node
+    region: oregon
+    plan: free
+    rootDirectory: backend
+    buildCommand: npm run build
+    startCommand: npm start
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: mealflow-db
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+      - key: NODE_ENV
+        value: production
+
+databases:
+  - name: mealflow-db
+    databaseName: mealflow
+    user: mealflow_user
+    plan: free
+    region: oregon
