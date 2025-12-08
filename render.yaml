@@ -17,6 +17,20 @@ services:
       - key: NODE_ENV
         value: production
 
+  - type: static
+    name: mealflow-frontend
+    region: oregon
+    plan: free
+    rootDirectory: frontend
+    buildCommand: npm install && npm run build
+    publishDirectory: dist
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          type: web
+          name: mealflow-backend
+          envVarKey: RENDER_EXTERNAL_URL
+
 databases:
   - name: mealflow-db
     databaseName: mealflow
