@@ -34,6 +34,16 @@ app.get('/health', (req, res) => {
     res.json({ status: 'ok', message: 'MealFlow API is running' });
 });
 
+// Root endpoint
+app.get('/', (req, res) => {
+    res.json({
+        message: 'Welcome to MealFlow API',
+        status: 'running',
+        documentation: '/api-docs', // Optional if you have docs
+        health: '/health'
+    });
+});
+
 // API Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
